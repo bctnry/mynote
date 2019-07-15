@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0%;
+    margin: 0%;
+}
+
+.header {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.5em;
+    padding: 0.1em;
+    width: fit-content;
+}
+
+.description {
+    margin-inline-start: 1em;
+    margin-inline-end: 1em;
+    padding: 0.2em;
+    width: fit-content;
+}
+
+.content-main {
+    font-size: 0.8em;
+    margin-inline-start: 1em;
+    margin-inline-end: 1em;
+    margin-block-start: 2em;
+}
+
+.main {
+    padding: 0;
+    margin: 0;
+}
+
+.editable {
+    background-color: white;
+}
+
+.editable:hover {
+    background-color: lightgray;
+}
+
+.toolbar {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background-color: white;
+}
+.toolbar-button-wrapper {
+    padding: 2px;
+    margin: 2px;
+    border: 1px black solid;
+    font-size: 0.3em;
+    display: inline-block;
+}
+.toolbar-button {
+    width:16px;height:16px;padding:0px;margin:0px;
+    display: inline-block;
+}
