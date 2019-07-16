@@ -1,25 +1,33 @@
 // data.
 var header = new Subject('Untitled Note');
 var description = new Subject('Greetings from Mynote dev. ' + greetings());
-// type Note = { id: number, text: string, children?: Content }
-// type Content = (Note | Placeholder)[]
-// type Placeholder = null;
-var content = [null];
+// type NoteContent = { id: number, text: string, children?: Note }
+// type Note = NoteContent[];
+var content = new Subject([]);
+
+function NoteContent() {
+    this.id = null;
+    this.text = new Subject('');
+    this.children = new Subject([]);
+}
+NoteContent.prototype.subscribe = function (config) {
+    this._subscription = {
+        text: this.text.subscribe({
+            onValue: config.onNewText
+        }),
+        children: this.text.subscribe({
+            onValue: 
+        })
+    };
+}
 
 
-// gensym.
-var symCounter = 0;
-var symBuffer = [];
-function gensym() {
-    if (symBuffer && symBuffer.length) {
-        return symBuffer.shift();
-    } else {
-        return symCounter++;
-    }
+
+function Note(init) {
+    this.content = [];
 }
-function putback(sym) {
-    symBuffer.unshift(sym);
-}
+Note.prototype.
+
 
 function makeField(className, hook, onSave, onCancel) {
     var res = document.createElement('div');
@@ -129,6 +137,10 @@ function makeContentField(hook, config) {
         var leftshift = document.createElement('input');
         leftshift.setAttribute('type', 'submit');
         leftshift.setAttribute('value', '<<');
+        leftshift.onclick = function (e) {
+            e.preventDefault();
+
+        }
         // rightshift.
         var rightshift = document.createElement('input');
         rightshift.setAttribute('type', 'submit');
@@ -158,15 +170,34 @@ function makeContentField(hook, config) {
     }
 
 }
+function makeInsertField(hook, onInsert) {
 
+}
 
 // content hook.
 var contentElement = [];
 
+function _renderNote(parentHook, parentElem) {
+    parentElem.append(parentHook.value.map(function (content) {
+        if (content.value.__proto__ === Array.prototype) {
+            var r = document.createElement('ul');
+            r.setAttribute('id', 'field-' + gensym());
+            _renderNote(content, r);
+            return r;
+        } else {
+            return makeContentField(content, {
 
+            })
+        }
+    }));
 
+    // 在列表末尾添加用于往列表末尾添加新数据的元素。
+    parentElem.append(makeInsertField, function (value) {
+        parentHook.push(value);
+    })
+}
 function renderNote() {
-
+    
 }
 
 function importNote() {
@@ -181,18 +212,6 @@ function exportNoteAsMarkdown() {
 }
 
 
-function greetings() {
-    var hour = new Date().getHours();
-    return (
-        (2 <= hour && hour <= 9)? 'Hope you have a good day :) '
-        : (9 < hour && hour <= 12)? 'Keep up with your good work :)'
-        : (12 < hour && hour <= 14)? 'Please, have a nice noon break :)'
-        : (14 < hour && hour <= 18)? 'Keep up with your good work :)'
-        : (18 < hour && hour <= 21)? 'Hope you have a good evening :)'
-        : (21 < hour && hour < 24) || (0 < hour && hour <= 2)? 'Hope you have a good night :)'
-        : ':)'
-    );
-}
 
 // refresh.
 function refresh() {
@@ -202,3 +221,8 @@ function refresh() {
 }
 refresh();
 
+
+// setting up toolbar.
+document.getElementById('toolbar-import').onclick = importNote;
+document.getElementById('toolbar-export').onclick = exportNote;
+document.getElementById('toolbar-export-md').onclick = exportNoteAsMarkdown;

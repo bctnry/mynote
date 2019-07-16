@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mynote</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="autumnflex.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <script src="script/autumnflex.js"></script>
+    <script src="script/gensym.js"></script>
+    <script src="script/util.js"></script>
 </head>
 <body>
     <!-- toolbar -->
     <div class="toolbar">
-        <span class="toolbar-button-wrapper"><img src="upload.svg" alt="Import" class="toolbar-button" /></span>
-        <span class="toolbar-button-wrapper"><img src="download.svg" alt="Export" class="toolbar-button" /></span>
-        <span class="toolbar-button-wrapper"><img src="archive.svg" alt="Export as Markdown" class="toolbar-button" /></span>
+        <span class="toolbar-button-wrapper" id="toolbar-import"><img src="assets/upload.svg" alt="Import" class="toolbar-button" /></span>
+        <span class="toolbar-button-wrapper" id="toolbar-export"><img src="assets/download.svg" alt="Export" class="toolbar-button" /></span>
+        <span class="toolbar-button-wrapper" id="toolbar-export-md"><img src="assets/archive.svg" alt="Export as Markdown" class="toolbar-button" /></span>
     </div>
     <!--
     <header class="editable">Mynote</header>
@@ -28,6 +30,6 @@
     </div>
 -->
     <div id="main"></div>
-    <script src="main.js"></script>
+    <script src="script/main.js"></script>
 </body>
 </html>
